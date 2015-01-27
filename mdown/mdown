@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>mdown</title>
+<script src="lib/jquery.min.js"></script>
+<script src="lib/marked.min.js"></script>
+<script src="lib/prettify.min.js"></script>
+<script src="lib/strapdown.js"></script>
+<link rel="stylesheet" src="lib/strapdown.css" />
+</head>
+
+<xmp id="markdown" theme="united" style="display:none;"></xmp>
+
+<script>
+function render(path) {
+  var xmp = document.getElementById("markdown");
+  $.get(path, function(data) {
+    xmp.innerHTML = data;
+    strapdown(window, document)
+  })
+}
+
+var hash = window.location.hash.substring(1)
+if (hash.length > 0) {
+  render(hash)
+} else {
+  window.location.hash = "#sample.md"
+  window.location.reload()
+}
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>qr code render</title>
+  <script src="lib/jquery.min.js"></script>
+  <script src="lib/qr.min.js"></script>
+  <link href="lib/bootstrap.min.css" rel="stylesheet" />
+  <link href="lib/bootstrap-responsive.min.css" rel="stylesheet" />
+
+  <style>
+  input#qrcode {
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+
+<center>
+<h1>qr code render</h1>
+<h3>enter text in the field below</h3>
+
+<img id="qrcode"></img>
+<br /><br /><br />
+<input id="input" value="" />
+
+</center>
+
+<script>
+function render(text) {
+  qr.image({
+    image: document.getElementById("qrcode"),
+    level: "Q",
+    size: 8,
+    value: text,
+  });
+}
+
+var tf = $('#input');
+tf.bind('keyup keypress blur change cut copy paste', function(event) {
+  render(tf.val())
+})
+
+var hash = window.location.hash.substring(1);
+if (hash.length > 0) {
+  tf.val(hash)
+  render(hash)
+} else {
+  tf.val("enter text here")
+  render("enter text here")
+}
+</script>
+</html>

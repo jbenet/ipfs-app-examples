@@ -56,6 +56,7 @@ function render(type, path) {
   var video = $('<video>')
 
   video
+    .attr("id", "videoid")
     .attr("width", "100%")
     .attr("height", "100%")
     .attr("controls", "controls")
@@ -80,6 +81,10 @@ function render(type, path) {
 
   $("div#video-div").innerHTML = "" // clear it
   $("div#video-div").append(video)
+
+  videojs("videoid").ready(function(){
+    this.play();
+  });
 }
 
 var last = ""
@@ -95,7 +100,7 @@ function update(path) {
   })
 
   tf.val(path)
-  window.location.hash = "#" + encodeURIComponent(path)
+  window.location.hash = "#" + path
   console.log("updated to: " + path)
 }
 

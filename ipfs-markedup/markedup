@@ -2,8 +2,10 @@
 <html>
 <head>
 
-<script type="text/javascript" src="/ipfs/QmdFZ6phVKrsCkSkYVQS6kAenmYBhHf9Avu32TDvnHS8hu/jquery.min.js"></script>
-<script type="text/javascript" src="/ipfs/QmdFZ6phVKrsCkSkYVQS6kAenmYBhHf9Avu32TDvnHS8hu/marked.min.js"></script>
+<script type="text/javascript" src="/ipfs/QmfUz4LnMK9V1d7M1K7Z7WtkCp7Di7m6JWL4btQafYNk26/jquery.min.js"></script>
+<script type="text/javascript" src="/ipfs/QmfUz4LnMK9V1d7M1K7Z7WtkCp7Di7m6JWL4btQafYNk26/marked.min.js"></script>
+<script type="text/javascript" src="/ipfs/QmfUz4LnMK9V1d7M1K7Z7WtkCp7Di7m6JWL4btQafYNk26/highlight.min.js"></script>
+<link rel="stylesheet" href="/ipfs/QmfUz4LnMK9V1d7M1K7Z7WtkCp7Di7m6JWL4btQafYNk26/highlight.min.css">
 
 <!-- bootstrap -->
 <link rel="stylesheet" href="/ipfs/Qmazpxk35RAtqWSSpv3GvGdAGSqTix4rtUNtwQ57dfWCFq/css/bootstrap.css">
@@ -94,10 +96,19 @@ body, html {
 </div>
 
 <script type="text/javascript">
+console.log("setting opts")
+marked.setOptions({highlight: function (code) {
+  console.log("trying to highlight: " + code)
+  console.log(hljs)
+  console.log(hljs.highlightAuto(code).value);
+  return hljs.highlightAuto(code).value
+}})
+
 var hash = window.location.hash.substring(1)
 var t = $("#text")
 var p = $("#preview")
 var state = "edit"
+
 function focus() {
   if (state == "edit")
     t.focus()

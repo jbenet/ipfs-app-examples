@@ -77,13 +77,13 @@ http://localhost:8080/ipfs/<hash-of-the-viewer>/example#/ipfs/<hash-you-got>
 For example:
 
 ```
-http://localhost:8080/ipfs/<hash-of-the-viewer>/example#/ipfs/QmT9qk3CRYbFDWpDFYeAv8T8H1gnongwKhh5J68NLkLir6
+http://localhost:8080/ipfs/QmPDgUhqWE4WqRqAHHtjUTkTjWRiSKGtAHtf8YWcqUiUvA/example#/ipfs/QmT9qk3CRYbFDWpDFYeAv8T8H1gnongwKhh5J68NLkLir6
 ```
 
 You can also view it on the public ipfs gateway, if you're connected:
 
 ```
-http://ipfs.io/ipfs/<hash-of-the-viewer>/example#/ipfs/QmT9qk3CRYbFDWpDFYeAv8T8H1gnongwKhh5J68NLkLir6
+http://ipfs.io/ipfs/QmPDgUhqWE4WqRqAHHtjUTkTjWRiSKGtAHtf8YWcqUiUvA/example#/ipfs/QmT9qk3CRYbFDWpDFYeAv8T8H1gnongwKhh5J68NLkLir6
 ```
 
 #### Bonus: publish with a makefile
@@ -93,14 +93,14 @@ I like publishing my examples with a simple `Makefile`:
 ```
 # Makefile that publishes this example
 
-viewer = "<hash-of-the-viewer>"
+viewer = "QmPDgUhqWE4WqRqAHHtjUTkTjWRiSKGtAHtf8YWcqUiUvA"
 local = "http://localhost:8080/ipfs/"
 gway = "http://ipfs.io/ipfs/"
 
 publish: $(shell find . )
   @hash=$(shell ipfs add -r -q . | tail -n1); \
-    echo $(local)/$(viewer)/example#/ipfs/$(hash); \
-    echo $(gway)/$(viewer)/example#/ipfs/$(hash)
+    echo $(local)/$(viewer)/example#/ipfs/$$hash; \
+    echo $(gway)/$(viewer)/example#/ipfs/$$hash
 
 # we need ; and escaped newlines to capture the variable
 ```
@@ -109,8 +109,8 @@ Now you can just:
 
 ```sh
 > make publish
-http://localhost:8080/ipfs/<hash-of-the-viewer>/example#/ipfs/<hash-of-the-example>
-http://ipfs.io/ipfs/<hash-of-the-viewer>/example#/ipfs/<hash-of-the-example>
+http://localhost:8080/ipfs/QmPDgUhqWE4WqRqAHHtjUTkTjWRiSKGtAHtf8YWcqUiUvA/example#/ipfs/QmT9qk3CRYbFDWpDFYeAv8T8H1gnongwKhh5J68NLkLir6
+http://ipfs.io/ipfs/QmPDgUhqWE4WqRqAHHtjUTkTjWRiSKGtAHtf8YWcqUiUvA/example#/ipfs/QmT9qk3CRYbFDWpDFYeAv8T8H1gnongwKhh5J68NLkLir6
 ```
 
 :)

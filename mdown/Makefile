@@ -2,4 +2,6 @@
 url="http://localhost:8080/ipfs/"
 
 publish:
-	@echo $(url)$(shell ipfs add -r -q . | tail -n1)/mdown
+	@export hash=$(shell ipfs add -r -q . | tail -n1); \
+		echo $$hash >published-version; \
+		echo $(url)$$hash/mdown

@@ -2,22 +2,64 @@
 <html>
 
 <head>
-<title>mdown</title>
+<title>mdown reader</title>
+
+<style>
+body .navbar-static-top {
+  width: inherit;
+}
+
+body .navbar .navbar-inner {
+  border: 0px;
+  border-bottom: 1px solid #e6e6e6;
+  box-shadow: none;
+  background: none;
+}
+
+body,
+body p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body h1,
+body h2,
+body h3,
+body h4 {
+  margin: 30px 0px 15px;
+  font-weight: 200;
+}
+
+</style>
+
 <script src="lib/jquery.min.js"></script>
 <script src="lib/marked.min.js"></script>
 <script src="lib/prettify.min.js"></script>
 <script src="lib/strapdown.js"></script>
+<script src="lib/params.js"></script>
 <link rel="stylesheet" src="lib/strapdown.css" />
 </head>
+<body>
 
-<xmp id="markdown" theme="united" style="display:none;"></xmp>
+<xmp id="markdown" theme="" style="display:none;"></xmp>
 
 <script>
 function render(path) {
   var xmp = document.getElementById("markdown");
+
+  // set theme first.
+  var theme = getParameterByName("theme")
+  if (theme && theme && theme.length > 0) {
+    $(xmp).attr('theme', theme)
+  }
+
   $.get(path, function(data) {
     xmp.innerHTML = data;
     strapdown(window, document)
+
+    // fix the navbar
+    $('.navbar-fixed-top')
+      .addClass('navbar-static-top')
+      .removeClass('navbar-fixed-top')
   })
 }
 
@@ -29,4 +71,5 @@ if (hash.length > 0) {
   window.location.reload()
 }
 </script>
+</body>
 </html>

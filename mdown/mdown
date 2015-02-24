@@ -18,6 +18,16 @@
 <h1 id="loading">Loading...</h1>
 
 <script>
+
+// set marked options
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+})
+
 function render(path) {
   var xmp = document.getElementById("markdown");
 

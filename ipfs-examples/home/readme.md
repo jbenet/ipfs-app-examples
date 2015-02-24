@@ -120,4 +120,3 @@ http://ipfs.io/ipfs/QmPDgUhqWE4WqRqAHHtjUTkTjWRiSKGtAHtf8YWcqUiUvA/example#/ipfs
 Note that your example wont stay up on the ipfs web by itself. The ipfs
 gateways cache things temporarily, but not forever. If you want to
 make it stick around permanently, read up about it here (todo: add link).
-
